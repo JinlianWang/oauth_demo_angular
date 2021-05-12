@@ -1,24 +1,37 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "./AuthenticationService";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Sunny\'s OAuth Demo';
   loginSubject: string = "";
   isLoggedIn = false;
   protectedResource: string;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService,
+              private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const sessionId = params['session'];
+      if(sessionId != null) {
+        console.log("Session ID found: " + sessionId);
+        this.checkStatus();
+      }
+    });
+  }
 
   checkStatus() {
     this.authenticationService.loginStatus().subscribe({next: () => {
         this.isLoggedIn = this.authenticationService.isLoggedIn;
         if(this.isLoggedIn) {
-          this.loginSubject = this.authenticationService.sessionInfo.sub;
+          this.loginSubject = this.authenticationService.sessionInfo.username;
         }
       }, error: ()=>{
         console.error("Login status call failed.");
@@ -27,7 +40,7 @@ export class AppComponent {
 
   login() {
     this.authenticationService.loginUrl().subscribe({next: (url) => {
-        window.open(url);
+        window.open(url,"_self");
       }, error: ()=>{
         console.error("Login call failed.");
       }});
@@ -49,3 +62,4 @@ export class AppComponent {
       }});
   }
 }
+
