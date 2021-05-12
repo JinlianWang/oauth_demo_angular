@@ -40,7 +40,7 @@ export class AuthenticationService {
   }
 
   getResourceFromServer(): Observable<string> {
-    return this.http.get(this.hostUrl + "/apis/authentication/resource").pipe(tap((resource: string) => {
+    return this.http.get(this.hostUrl + "/apis/authentication/resource", {responseType: 'text' as 'json'}).pipe(tap((resource: string) => {
       console.log("Resource retrieved: " + resource);
     }, catchError(this.handleError)));
   }

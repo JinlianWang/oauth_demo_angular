@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
         this.isLoggedIn = this.authenticationService.isLoggedIn;
         if(this.isLoggedIn) {
           this.loginSubject = this.authenticationService.sessionInfo.username;
+          this.getResource();
         }
       }, error: ()=>{
         console.error("Login status call failed.");
