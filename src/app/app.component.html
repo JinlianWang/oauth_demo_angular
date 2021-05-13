@@ -1,13 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center" *ngIf="isLoggedIn == false">
   <h1>
-    Welcome to {{ title }}! Please login first:
+    Welcome to {{ title }}!
   </h1>
   <button mat-raise-button (click)="login()"> Login </button>
 </div>
 <div style="text-align: center" *ngIf="isLoggedIn == true">
   <h1>
-    Welcome to {{ title }}, {{loginSubject}}!
+    Welcome to {{ title }}!
+  </h1>
+  <h1>
+    You have logged in as {{loginSubject}}!
   </h1>
   <div>
     Here is your resource: {{protectedResource}}

@@ -3,4 +3,5 @@ export class SessionInfo {
   sub: string;
   username: string;
   email: string;
+  expirationTime: bigint;
 }
