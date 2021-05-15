@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
     this.authenticationService.getResourceFromServer().subscribe({next: (resource) => {
           this.protectedResource = resource;
       }, error: ()=>{
-        console.error("Login call failed.");
+        console.error("Resource call failed.");
       }});
   }
 

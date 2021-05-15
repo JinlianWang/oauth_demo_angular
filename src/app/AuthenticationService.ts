@@ -8,7 +8,7 @@ import {SessionInfo} from "./SessionInfo";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private hostUrl: string = "https://a7blo97bal.execute-api.us-east-1.amazonaws.com/prod";
+  private hostUrl: string = "https://f4y2bwysuc.execute-api.us-east-1.amazonaws.com/dev";
   private static CONST_SESSION_INFO = "SESSION_INFO";
 
   //Populated in 3 cases: when read from session storage; when id from query string at which time its sub is empty; when login successfully
